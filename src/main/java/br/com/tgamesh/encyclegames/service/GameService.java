@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.tgamesh.encyclegames.dto.GameDto;
 import br.com.tgamesh.encyclegames.dto.GameShortDto;
+import br.com.tgamesh.encyclegames.projections.GameMinProjection;
 import br.com.tgamesh.encyclegames.repository.GameRepository;
 
 @Service
@@ -15,6 +16,8 @@ public class GameService {
 	
 	@Autowired
 	private GameRepository repository;
+	
+	
 	
 	@Transactional(readOnly=true)
 	public List<GameShortDto>findAll(){
@@ -27,5 +30,10 @@ public class GameService {
 		var entity = repository.findById(id).get();
 		GameDto dto = new GameDto(entity);
 		return dto;
+	}
+	@Transactional(readOnly=true)
+	public List<GameShortDto>listFindAll(Long id){
+		List<GameMinProjection> entity= repository.searchByList(id);
+		return entity.stream().map(t -> new GameShortDto(t)).toList();
 	}
 }

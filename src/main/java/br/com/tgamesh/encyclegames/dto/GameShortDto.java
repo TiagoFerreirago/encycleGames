@@ -1,6 +1,7 @@
 package br.com.tgamesh.encyclegames.dto;
 
 import br.com.tgamesh.encyclegames.entity.Game;
+import br.com.tgamesh.encyclegames.projections.GameMinProjection;
 
 public class GameShortDto {
 
@@ -21,6 +22,14 @@ public class GameShortDto {
 		this.year = entity.getYear();
 		this.imgUrl = entity.getImgUrl();
 		this.shortDescription = entity.getShortDescription();
+	}
+	
+	public GameShortDto(GameMinProjection entity) {
+		id = entity.getId();
+		title= entity.getTitle();
+		year= entity.getYear();
+		imgUrl= entity.getImgUrl();
+		shortDescription= entity.getShortDescription();
 	}
 
 	public Long getId() {
